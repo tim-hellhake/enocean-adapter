@@ -1,0 +1,54 @@
+{
+  "name": "enocean-adapter",
+  "display_name": "Enocean",
+  "version": "0.1.0",
+  "description": "Connect your enocean devices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tim-hellhake/enocean-adapter.git"
+  },
+  "author": "Tim Hellhake",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tim-hellhake/enocean-adapter/issues"
+  },
+  "homepage": "https://github.com/tim-hellhake/enocean-adapter#readme",
+  "files": [
+    "LICENSE",
+    "SHA256SUMS",
+    "index.js",
+    "enocean-adapter.js"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "{nodeLoader} {path}",
+    "schema": {
+      "type": "object",
+      "required": [
+        "serialPort"
+      ],
+      "properties": {
+        "serialPort": {
+          "type": "string",
+          "title": "The serial port of the enocean adapter"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "node-enocean": "^3.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "babel-eslint": "^10.0.1"
+  }
+}
