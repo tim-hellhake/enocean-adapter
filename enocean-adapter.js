@@ -18,9 +18,9 @@ class PushButton extends Device {
   constructor(adapter, senderId) {
     super(adapter, `${PushButton.name}-${senderId}`);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
-    this['@type'] = 'PushButton';
+    this['@type'] = ['PushButton'];
     this.name = this.id;
-    this.description = 'Enocean push button';
+    this.description = 'EnOcean push button';
 
     this.keyCodes = {
       10: 'A1',
@@ -73,9 +73,9 @@ class PushButton extends Device {
   }
 }
 
-class EnoceanAdapter extends Adapter {
+class EnOceanAdapter extends Adapter {
   constructor(addonManager, manifest) {
-    super(addonManager, EnoceanAdapter.name, manifest.name);
+    super(addonManager, EnOceanAdapter.name, manifest.name);
     addonManager.addAdapter(this);
     const knownDevices = {};
     const serialPort = manifest.moziot.config.serialPort;
@@ -107,4 +107,4 @@ class EnoceanAdapter extends Adapter {
   }
 }
 
-module.exports = EnoceanAdapter;
+module.exports = EnOceanAdapter;
