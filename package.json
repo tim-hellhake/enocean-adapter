@@ -1,8 +1,8 @@
 {
   "name": "enocean-adapter",
-  "display_name": "Enocean",
+  "display_name": "EnOcean",
   "version": "0.1.0",
-  "description": "Connect your enocean devices",
+  "description": "Connect your EnOcean devices",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -39,7 +39,7 @@
       "properties": {
         "serialPort": {
           "type": "string",
-          "title": "The serial port of the enocean adapter"
+          "title": "The serial port of the EnOcean adapter"
         }
       }
     }

@@ -1,4 +1,4 @@
-# Enocean Adapter
+# EnOcean Adapter
 
 [![Build Status](https://travis-ci.org/tim-hellhake/enocean-adapter.svg?branch=master)](https://travis-ci.org/tim-hellhake/enocean-adapter)
 [![dependencies](https://david-dm.org/tim-hellhake/enocean-adapter.svg)](https://david-dm.org/tim-hellhake/enocean-adapter)
