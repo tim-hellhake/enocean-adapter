@@ -1,0 +1,33 @@
+{
+  "manifest_version": 1,
+  "id": "enocean-adapter",
+  "name": "EnOcean",
+  "short_name": "EnOcean",
+  "version": "0.1.4",
+  "description": "Connect your EnOcean devices",
+  "homepage_url": "https://github.com/tim-hellhake/enocean-adapter#readme",
+  "license": "MPL-2.0",
+  "author": "Tim Hellhake",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "{nodeLoader} {path}",
+      "strict_min_version": "0.10.0",
+      "strict_max_version": "*",
+      "primary_type": "adapter"
+    }
+  },
+  "options": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "serialPort"
+      ],
+      "properties": {
+        "serialPort": {
+          "type": "string",
+          "title": "The serial port of the EnOcean adapter"
+        }
+      }
+    }
+  }
+}
