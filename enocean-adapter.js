@@ -53,8 +53,7 @@ class PushButton extends Device {
       console.log('Button up');
       for (const pair of this.properties) {
         const property = pair[1];
-        property.setCachedValue(false);
-        this.notifyPropertyChanged(property);
+        property.setCachedValueAndNotify(false);
       }
       return;
     }
@@ -64,8 +63,7 @@ class PushButton extends Device {
     if (name) {
       console.log(`Button ${name} down`);
       const property = this.properties.get(name);
-      property.setCachedValue(true);
-      this.notifyPropertyChanged(property);
+      property.setCachedValueAndNotify(true);
       return;
     }
 
