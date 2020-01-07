@@ -1,6 +1,9 @@
 #!/bin/bash -e
 
+npm ci
+npm run build
 rm -rf node_modules
+
 if [ -z "${ADDON_ARCH}" ]; then
   TARFILE_SUFFIX=
 else
@@ -10,20 +13,22 @@ fi
 # For openwrt-linux-arm and linux-arm we need to cross compile.
 if [[ "${ADDON_ARCH}" =~ "linux-arm" ]]; then
   # We assume that CC and CXX are pointing to the cross compilers
-  npm install --ignore-scripts --production
+  npm ci --ignore-scripts --production
   npm rebuild --arch=armv6l --target_arch=arm
 else
-  npm install --production
+  npm ci --production
 fi
 
-rm -f SHA256SUMS
+rm -rf node_modules/.bin
+
 sha256sum package.json manifest.json lib/*.js LICENSE README.md > SHA256SUMS
 find node_modules -type f -exec sha256sum {} \; >> SHA256SUMS
-TARFILE="$(npm pack)"
+TARFILE=`npm pack`
 tar xzf ${TARFILE}
 rm ${TARFILE}
 TARFILE_ARCH="${TARFILE/.tgz/${TARFILE_SUFFIX}.tgz}"
 cp -r node_modules ./package
 tar czf ${TARFILE_ARCH} package
+sha256sum ${TARFILE_ARCH} > ${TARFILE_ARCH}.sha256sum
 rm -rf package
 echo "Created ${TARFILE_ARCH}"
