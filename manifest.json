@@ -3,7 +3,7 @@
   "id": "enocean-adapter",
   "name": "EnOcean",
   "short_name": "EnOcean",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Connect your EnOcean devices",
   "homepage_url": "https://github.com/tim-hellhake/enocean-adapter#readme",
   "license": "MPL-2.0",
