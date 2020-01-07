@@ -6,28 +6,24 @@
 
 'use strict';
 
-const enocean = require('node-enocean')();
+import enocean from 'node-enocean';
 
-const {
-  Adapter,
-  Device,
-  Property
-} = require('gateway-addon');
+import { Adapter, Device, Property } from 'gateway-addon';
 
 class PushButton extends Device {
-  constructor(adapter, senderId) {
+  private readonly keyCodes: { [key: number]: string } = {
+    10: 'A1',
+    30: 'A0',
+    50: 'B1',
+    70: 'B0',
+  };
+
+  constructor(adapter: Adapter, senderId: string) {
     super(adapter, `${PushButton.name}-${senderId}`);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
     this['@type'] = ['PushButton'];
     this.name = this.id;
     this.description = 'EnOcean push button';
-
-    this.keyCodes = {
-      10: 'A1',
-      30: 'A0',
-      50: 'B1',
-      70: 'B0',
-    };
 
     for (const keyCode in this.keyCodes) {
       const name = this.keyCodes[keyCode];
@@ -43,7 +39,7 @@ class PushButton extends Device {
     }
   }
 
-  handle(data) {
+  handle(data: any) {
     if (!data.raw) {
       console.warn('Data contains no value');
       return;
@@ -63,19 +59,23 @@ class PushButton extends Device {
     if (name) {
       console.log(`Button ${name} down`);
       const property = this.properties.get(name);
-      property.setCachedValueAndNotify(true);
-      return;
+      if (property) {
+        property.setCachedValueAndNotify(true);
+      } else {
+        console.warn(`Unknown property ${name}`);
+      }
+    } else {
+      console.warn(`Unknown key code ${data.raw}`);
     }
-
-    console.warn(`Unknown key code ${data.raw}`);
   }
 }
 
-class EnOceanAdapter extends Adapter {
-  constructor(addonManager, manifest) {
+export class EnOceanAdapter extends Adapter {
+  private readonly knownDevices: { [key: string]: PushButton } = {};
+
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, EnOceanAdapter.name, manifest.name);
     addonManager.addAdapter(this);
-    const knownDevices = {};
     const serialPort = manifest.moziot.config.serialPort;
 
     if (!serialPort) {
@@ -85,17 +85,17 @@ class EnOceanAdapter extends Adapter {
 
     enocean.listen(serialPort);
 
-    enocean.on('data', (data) => {
+    enocean.on('data', (data: any) => {
       console.log(`Received ${JSON.stringify(data)}`);
       if (data.choice === 'f6') {
-        const knownDevice = knownDevices[data.senderId];
+        const knownDevice = this.knownDevices[data.senderId];
 
         if (knownDevice) {
           knownDevice.handle(data);
         } else {
           console.log(`Detected new push button ${data.senderId}`);
           const device = new PushButton(this, data.senderId);
-          knownDevices[data.senderId] = device;
+          this.knownDevices[data.senderId] = device;
           this.handleDeviceAdded(device);
         }
       } else {
@@ -104,5 +104,3 @@ class EnOceanAdapter extends Adapter {
     });
   }
 }
-
-module.exports = EnOceanAdapter;

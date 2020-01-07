@@ -3,10 +3,10 @@
   "display_name": "EnOcean",
   "version": "0.1.4",
   "description": "Connect your EnOcean devices",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,8 @@
     "LICENSE",
     "SHA256SUMS",
     "manifest.json",
-    "index.js",
-    "enocean-adapter.js"
+    "lib/index.js",
+    "lib/enocean-adapter.js"
   ],
   "moziot": {
     "api": {
@@ -49,7 +49,6 @@
     "node-enocean": "^3.3.1"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "babel-eslint": "^10.0.1"
+    "typescript": "^3.7.4"
   }
 }

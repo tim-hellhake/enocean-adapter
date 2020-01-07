@@ -6,7 +6,6 @@
 
 'use strict';
 
-const EnOceanAdapter = require('./enocean-adapter');
+import { EnOceanAdapter } from './enocean-adapter';
 
-module.exports =
-    (addonManager, manifest) => new EnOceanAdapter(addonManager, manifest);
+export = (addonManager: any, manifest: any) => new EnOceanAdapter(addonManager, manifest);
