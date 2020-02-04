@@ -6,7 +6,7 @@
 
 'use strict';
 
-import enocean from 'node-enocean';
+import Enocean from 'node-enocean';
 
 import { Adapter, Device, Property } from 'gateway-addon';
 
@@ -82,6 +82,8 @@ export class EnOceanAdapter extends Adapter {
       console.warn('Please specify serial port in the config');
       return;
     }
+
+    const enocean = Enocean();
 
     enocean.listen(serialPort);
 

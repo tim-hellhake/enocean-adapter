@@ -5,6 +5,10 @@
  */
 
 declare module 'node-enocean' {
-    function listen(serialPort: any): void;
-    function on(arg0: string, arg1: (data: any) => void): void;
+    export default function (): Enocean;
+
+    class Enocean {
+        public listen(serialPort: any): void;
+        public on(arg0: string, arg1: (data: any) => void): void;
+    }
 }

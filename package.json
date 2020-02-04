@@ -46,7 +46,7 @@
     }
   },
   "dependencies": {
-    "node-enocean": "^3.3.1"
+    "node-enocean": "tim-hellhake/node-enocean#fb61796"
   },
   "devDependencies": {
     "typescript": "^3.7.4"
