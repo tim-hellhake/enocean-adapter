@@ -1,6 +1,6 @@
 # EnOcean Adapter
 
-[![Build Status](https://travis-ci.org/tim-hellhake/enocean-adapter.svg?branch=master)](https://travis-ci.org/tim-hellhake/enocean-adapter)
+[![Build Status](https://github.com/tim-hellhake/enocean-adapter/workflows/Build/badge.svg)](https://github.com/tim-hellhake/enocean-adapter/actions?query=workflow%3ABuild)
 [![dependencies](https://david-dm.org/tim-hellhake/enocean-adapter.svg)](https://david-dm.org/tim-hellhake/enocean-adapter)
 [![devDependencies](https://david-dm.org/tim-hellhake/enocean-adapter/dev-status.svg)](https://david-dm.org/tim-hellhake/enocean-adapter?type=dev)
 [![optionalDependencies](https://david-dm.org/tim-hellhake/enocean-adapter/optional-status.svg)](https://david-dm.org/tim-hellhake/enocean-adapter?type=optional)
